@@ -20,7 +20,7 @@
 1. 공공데이터포털 로그인 > 마이페이지 > 개발계정에서 "일반 인증키"를 복사합니다.
 2. 키는 **코드/GitHub에 넣지 마세요.** 아래 Vercel 환경변수에만 등록합니다.
 
-### 2) 네이버 지도 Client ID
+### 2) (선택) 네이버 지도 Client ID — 없으면 구글 지도(키 불필요)가 대신 표시됩니다
 1. https://www.ncloud.com 가입 후 콘솔 > Services > AI·NAVER API > **Maps**(Application) 에서 Application 을 등록합니다. (결제수단 등록이 필요할 수 있으며, 개인 규모 사용량은 무료 한도 안입니다.)
 2. 사용할 API 로 **Dynamic Map** 을 선택합니다.
 3. **Web 서비스 URL** 에 `http://localhost:5173` 과 배포 주소(예: `https://내프로젝트.vercel.app`)를 등록합니다. 등록하지 않으면 지도가 인증 실패로 뜨지 않습니다.
@@ -31,7 +31,7 @@
 2. Settings > Environment Variables 에 위 두 값을 등록합니다 (Production / Preview / Development 모두).
 3. **등록 후 Redeploy** 해야 적용됩니다.
 4. 점검: 배포주소`/api/visitors` 를 열어 `{"months":[...]}` 가 나오면 정상. `DATA_GO_KR_KEY 환경변수가 없습니다` 면 등록·Redeploy 누락, `공공데이터 응답 오류` 면 키 또는 활용신청 문제입니다.
-5. 지도가 비어 있으면: Client ID 오타, Web 서비스 URL 미등록을 확인하세요. 키가 없으면 지도 대신 안내 문구와 "네이버 지도에서 열기" 링크가 보입니다.
+5. 지도: `VITE_NAVER_MAP_CLIENT_ID` 가 없거나 인증에 실패하면 구글 지도 임베드(키 불필요)가 대신 보이고, 항상 "네이버 지도에서 열기" 링크가 함께 있습니다. 네이버 지도가 안 뜨면 Client ID 오타, Web 서비스 URL 미등록을 확인하세요.
 
 ## 로컬 실행
 Node.js LTS 설치 후:

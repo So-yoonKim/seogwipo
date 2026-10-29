@@ -56,10 +56,18 @@ export default function NaverMap({ spot }) {
       {KEY && !error ? (
         <div ref={boxRef} className="map" />
       ) : (
-        <div className="map placeholder">
-          <p>{error || '네이버 지도 Client ID(VITE_NAVER_MAP_CLIENT_ID)를 설정하면 여기에 지도가 표시돼요.'}</p>
-        </div>
+        // 네이버 Client ID가 없거나 인증에 실패하면 키가 필요 없는 구글 지도 임베드로 대신 보여 줍니다.
+        <iframe
+          className="map"
+          title={`${spot.name} 위치`}
+          src={`https://maps.google.com/maps?q=${spot.lat},${spot.lng}(${encodeURIComponent(spot.name)})&z=15&hl=ko&output=embed`}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+          style={{ border: 0 }}
+        />
       )}
+      {error && <p className="muted small">{error} (대신 구글 지도를 보여 드려요)</p>}
       <a className="maplink" href={link} target="_blank" rel="noreferrer">네이버 지도에서 열기 ↗</a>
     </div>
   )
